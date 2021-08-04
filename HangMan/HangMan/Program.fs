@@ -20,7 +20,7 @@ let rec play currentState =
                 | l when l = 1 -> Letter input.[0]
                 | _ -> Word input
                 
-    let newState = guess |> makeAGuess (currentState |> Guessing) 
+    let newState = guess |> makeAGuess currentState
     
     match newState with
     | Guessing g -> play g
@@ -31,6 +31,6 @@ let rec play currentState =
 let main argv =
     let words = allWords |> Array.filter (fun w -> w.Length > 3)
     let word = getRandomWordUsingTimeSeed words
-    let state = { AllowedNumberOfGuesses = 10; WordBeingGuessed = "biscuit"; LettersGuessed = Set.empty; WordsGuessed = Set.empty }
+    let state = { AllowedNumberOfGuesses = 10; WordBeingGuessed = word; LettersGuessed = Set.empty; WordsGuessed = Set.empty }
     printfn $"{play state}"
     0

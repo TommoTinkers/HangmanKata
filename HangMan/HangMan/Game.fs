@@ -60,8 +60,6 @@ let evaluateGuessingState state =
     | g -> Guessing g
     
 let makeAGuess state guess =
-    match state with
-    | Won | Lost -> state
-    | Guessing g -> match guess with
-                    | Letter l -> guessALetter g l |> evaluateGuessingState
-                    | Word w -> guessAWord g w |> evaluateGuessingState                                    
+    match guess with
+    | Letter l -> guessALetter state l |> evaluateGuessingState
+    | Word w -> guessAWord state w |> evaluateGuessingState                                    
